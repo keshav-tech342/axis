@@ -9,10 +9,16 @@ bp = Blueprint("departments", __name__, url_prefix="/api/v1/departments")
 @jwt_required()
 def get_departments():
     user = User.query.get(get_jwt_identity())
+    include_stats = request.args.get("include_stats") == "true"
 
     departments = DepartmentService.get_all(user.organization_id)
 
     return jsonify({
         "success": True,
-        "data": [d.to_dict() for d in departments]
+        "data": {
+            "departments": [
+                d.to_dict(include_stats=include_stats)
+                for d in departments
+            ]
+        }
     }), 200
