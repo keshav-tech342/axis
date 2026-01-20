@@ -50,6 +50,10 @@ def create_app(config_name='development'):
     from app.routes import departments
     app.register_blueprint(departments.bp)
 
+    # After departments blueprint
+    from app.routes import activities
+    app.register_blueprint(activities.bp)
+
     @app.route("/health")
     def health():
         return {"status": "healthy"}, 200
