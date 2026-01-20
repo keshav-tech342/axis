@@ -1,7 +1,7 @@
 import bcrypt
 from flask_jwt_extended import create_access_token, create_refresh_token
 from datetime import timedelta
-from app import db
+from app.extensions import db
 from app.models.user import User
 from app.models.organization import Organization
 from datetime import datetime

@@ -4,6 +4,7 @@ import DashboardLayout from './components/layout/DashboardLayout';
 import Dashboard from './pages/Dashboard';
 import Departments from './pages/Departments';
 import ProtectedRoute from './components/ProtectedRoute';
+import DepartmentDetail from './pages/DepartmentDetail';
 
 function App() {
   const token = localStorage.getItem('access_token');
@@ -27,6 +28,14 @@ function App() {
           </DashboardLayout>
         </ProtectedRoute>
       } />
+
+      <Route path="/departments/:id" element={
+       <ProtectedRoute>
+         <DashboardLayout>
+           <DepartmentDetail />
+          </DashboardLayout>
+      </ProtectedRoute>
+} />
 
       <Route path="/" element={<Navigate to={token ? "/dashboard" : "/login"} replace />} />
     </Routes>
