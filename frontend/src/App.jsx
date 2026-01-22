@@ -5,6 +5,8 @@ import Dashboard from './pages/Dashboard';
 import Departments from './pages/Departments';
 import ProtectedRoute from './components/ProtectedRoute';
 import DepartmentDetail from './pages/DepartmentDetail';
+import Activities from './pages/Activities';
+
 
 function App() {
   const token = localStorage.getItem('access_token');
@@ -29,13 +31,21 @@ function App() {
         </ProtectedRoute>
       } />
 
+      <Route path="/activities" element={
+        <ProtectedRoute>
+          <DashboardLayout>
+            <Activities />
+          </DashboardLayout>
+        </ProtectedRoute>
+      } />
+
       <Route path="/departments/:id" element={
        <ProtectedRoute>
          <DashboardLayout>
            <DepartmentDetail />
           </DashboardLayout>
       </ProtectedRoute>
-} />
+      } />
 
       <Route path="/" element={<Navigate to={token ? "/dashboard" : "/login"} replace />} />
     </Routes>
